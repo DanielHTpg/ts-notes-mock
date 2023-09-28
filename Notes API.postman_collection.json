@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "ebca3ea9-9575-4e8e-84b4-2b1873d69817",
+		"name": "Notes API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7625148"
+	},
+	"item": [
+		{
+			"name": "Read notes for project",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/project/{{ProjectId}}/notes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"project",
+						"{{ProjectId}}",
+						"notes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create note in project",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"note\": \"my second note\",\r\n    \"taskId\": \"123555\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/project/{{ProjectId}}/notes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"project",
+						"{{ProjectId}}",
+						"notes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update note",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"note\": \"Updated text 3\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/project/{{ProjectId}}/notes/668a5538-1b32-4a14-a59b-3325ca903d37",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"project",
+						"{{ProjectId}}",
+						"notes",
+						"668a5538-1b32-4a14-a59b-3325ca903d37"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete note",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"note\": \"Updated text 2\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/project/{{ProjectId}}/notes/a070b45b-eaf6-47a8-b918-c53808952611",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"project",
+						"{{ProjectId}}",
+						"notes",
+						"a070b45b-eaf6-47a8-b918-c53808952611"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
