@@ -47,6 +47,16 @@ app.get('/project/:projectId/notes/:noteId', (req, res) => {
 	res.json(note);
 });
 
+// JohannesF - added
+// get notes for a single task
+app.get('/project/:projectId/tasks/:taskId/note', (req, res) => {
+	const note = db.getForTask(req.params.projectId, req.params.taskId);
+	if (note === null) {
+		return res.status(404);
+	}
+	res.json(note);
+});
+
 // Create a note
 app.post('/project/:projectId/notes', validateRequestBody(noteCreationSchema), (req, res) => {
 	const creationInfo: INoteCreationInformation = req.body;

@@ -63,6 +63,16 @@ export class Database {
 		return note;
 	}
 
+	// JohannesF - added
+	getForTask(projectId: string, taskId: string): INote | null {
+		const note = this.notes.find(note => note.projectId === projectId && note.taskId === taskId);
+		if (!note) {
+			return null
+		}
+
+		return note;
+	}
+
 	update(noteId: string, updateInfo: INoteUpdateInformation) {
 		const index = this.notes.findIndex(note => note.noteId === noteId);
 		if (index !== -1) {
