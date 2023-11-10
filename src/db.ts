@@ -2,14 +2,14 @@ import fs from 'fs';
 
 import { v4 } from 'uuid';
 
-import { INote, mapNotes, INoteUpdateInformation, INoteCreationInformation } from './interfaces';
+import { IScheduleComment, mapNotes, INoteUpdateInformation, INoteCreationInformation } from './interfaces';
 
 const DB_FILE = './data.json';
 
 const currentUser = 'test_user123';
 
 export class Database {
-	notes: INote[] = [];
+	notes: IScheduleComment[] = [];
 
 	constructor() {
 		this.load();
@@ -26,18 +26,18 @@ export class Database {
 		fs.writeFileSync(DB_FILE, JSON.stringify(this.notes, null, 2));
 	}
 
-	add(projectId: string, creationInfo: INoteCreationInformation): INote | null {
+	add(projectId: string, creationInfo: INoteCreationInformation): IScheduleComment | null {
 
 		const noteForTask = this.notes.find(n => n.projectId === projectId && n.taskId === creationInfo.taskId);
 		if (noteForTask) {
 			return null;
 		}
 
-		const note: INote = {
+		const note: IScheduleComment = {
 			id: v4(),
 			projectId,
 			taskId: creationInfo.taskId,
-			note: creationInfo.note,
+			comment: creationInfo.note,
 			created: new Date(),
 			modified: new Date(),
 			createdBy: currentUser,
@@ -50,11 +50,11 @@ export class Database {
 		return note;
 	}
 
-	getAll(projectId: string): INote[] {
+	getAll(projectId: string): IScheduleComment[] {
 		return this.notes.filter(note => note.projectId === projectId);
 	}
 
-	get(projectId: string, noteId: string): INote | null {
+	get(projectId: string, noteId: string): IScheduleComment | null {
 		const note = this.notes.find(note => note.projectId === projectId && note.id === noteId);
 		if (!note) {
 			return null
@@ -64,7 +64,7 @@ export class Database {
 	}
 
 	// JohannesF - added
-	getForTask(projectId: string, taskId: string): INote[] {
+	getForTask(projectId: string, taskId: string): IScheduleComment[] {
 		const notes = this.notes.filter(note => note.projectId === projectId && note.taskId === taskId);
 		return notes;
 	}
@@ -84,7 +84,7 @@ export class Database {
 		return null;
 	}
 
-	delete(noteId: string): INote | null {
+	delete(noteId: string): IScheduleComment | null {
 		const index = this.notes.findIndex(note => note.id === noteId);
 		const note = this.notes[index];
 		if (index !== -1) {
