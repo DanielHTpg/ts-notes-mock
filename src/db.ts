@@ -34,7 +34,7 @@ export class Database {
 		}
 
 		const note: INote = {
-			noteId: v4(),
+			id: v4(),
 			projectId,
 			taskId: creationInfo.taskId,
 			note: creationInfo.note,
@@ -55,7 +55,7 @@ export class Database {
 	}
 
 	get(projectId: string, noteId: string): INote | null {
-		const note = this.notes.find(note => note.projectId === projectId && note.noteId === noteId);
+		const note = this.notes.find(note => note.projectId === projectId && note.id === noteId);
 		if (!note) {
 			return null
 		}
@@ -70,7 +70,7 @@ export class Database {
 	}
 
 	update(noteId: string, updateInfo: INoteUpdateInformation) {
-		const index = this.notes.findIndex(note => note.noteId === noteId);
+		const index = this.notes.findIndex(note => note.id === noteId);
 		if (index !== -1) {
 			this.notes[index] = {
 				...this.notes[index],
@@ -85,7 +85,7 @@ export class Database {
 	}
 
 	delete(noteId: string): INote | null {
-		const index = this.notes.findIndex(note => note.noteId === noteId);
+		const index = this.notes.findIndex(note => note.id === noteId);
 		const note = this.notes[index];
 		if (index !== -1) {
 			this.notes.splice(index, 1);

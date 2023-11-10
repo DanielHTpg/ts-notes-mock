@@ -1,5 +1,5 @@
 export interface INote {
-	noteId: string;
+	id: string;
 	projectId: string;
 	taskId: string;
 	note: string;
