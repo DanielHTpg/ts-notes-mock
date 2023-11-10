@@ -64,13 +64,9 @@ export class Database {
 	}
 
 	// JohannesF - added
-	getForTask(projectId: string, taskId: string): INote | null {
-		const note = this.notes.find(note => note.projectId === projectId && note.taskId === taskId);
-		if (!note) {
-			return null
-		}
-
-		return note;
+	getForTask(projectId: string, taskId: string): INote[] {
+		const notes = this.notes.filter(note => note.projectId === projectId && note.taskId === taskId);
+		return notes;
 	}
 
 	update(noteId: string, updateInfo: INoteUpdateInformation) {

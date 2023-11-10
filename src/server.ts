@@ -11,11 +11,11 @@ const db = new Database();
 
 const noteCreationSchema = Joi.object({
 	taskId: Joi.string().required(),
-	note: Joi.string().required(),
+	comment: Joi.string().required(),
 });
 
 const noteUpdateSchema = Joi.object({
-	note: Joi.string().required(),
+	comment: Joi.string().required(),
 });
 
 const validateRequestBody = (schema: Joi.ObjectSchema) => {
@@ -34,12 +34,12 @@ const validateRequestBody = (schema: Joi.ObjectSchema) => {
 app.use(express.json());
 
 // Get notes for a project
-app.get('/project/:projectId/notes', (req, res) => {
+app.get('/project/:projectId/comments', (req, res) => {
 	const notes = db.getAll(req.params.projectId);
 	res.json(notes);
 });
 
-app.get('/project/:projectId/notes/:noteId', (req, res) => {
+app.get('/project/:projectId/comments/:noteId', (req, res) => {
 	const note = db.get(req.params.projectId, req.params.noteId);
 	if (note === null) {
 		return res.status(404);
@@ -49,16 +49,13 @@ app.get('/project/:projectId/notes/:noteId', (req, res) => {
 
 // JohannesF - added
 // get notes for a single task
-app.get('/project/:projectId/tasks/:taskId/note', (req, res) => {
-	const note = db.getForTask(req.params.projectId, req.params.taskId);
-	if (note === null) {
-		return res.status(404);
-	}
-	res.json(note);
+app.get('/project/:projectId/tasks/:taskId/comments', (req, res) => {
+	const notes = db.getForTask(req.params.projectId, req.params.taskId);
+	res.json(notes);
 });
 
 // Create a note
-app.post('/project/:projectId/notes', validateRequestBody(noteCreationSchema), (req, res) => {
+app.post('/project/:projectId/comments', validateRequestBody(noteCreationSchema), (req, res) => {
 	const creationInfo: INoteCreationInformation = req.body;
 	const note = db.add(req.params.projectId, creationInfo);
 
