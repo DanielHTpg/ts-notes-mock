@@ -37,7 +37,7 @@ export class Database {
 			id: v4(),
 			projectId,
 			taskId: creationInfo.taskId,
-			comment: creationInfo.note,
+			comment: creationInfo.comment,
 			created: new Date(),
 			modified: new Date(),
 			createdBy: currentUser,

@@ -1,3 +1,3 @@
 export interface INoteUpdateInformation {
-	note: string;
+	comment: string;
 }

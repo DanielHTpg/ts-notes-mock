@@ -1,4 +1,4 @@
 export interface INoteCreationInformation {
 	taskId: string;
-	note: string;
+	comment: string;
 }
